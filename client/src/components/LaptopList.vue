@@ -17,7 +17,11 @@
         <td>{{ laptop.brand }}</td>
         <td>{{ laptop.model }}</td>
         <td>{{ laptop.serialNumber }}</td>
-        <td>{{ laptop.employeeId }}</td>
+        <td>
+          <router-link v-if="laptop.employeeId" :to="{ name: 'employee', params: {id: laptop.employeeId } }"> 
+            {{ laptop.employeeId }}
+          </router-link>
+        </td>
         
         <td>
             <router-link :to="{ name: 'laptop', params: { id: laptop.id } }">

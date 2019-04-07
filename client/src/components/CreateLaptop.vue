@@ -2,28 +2,24 @@
 
 <div>
 
-    <div class="form-group">
+    <h2>Create new laptop</h2>
 
-        <label for="laptopBrand">Brand</label>    
-        <input id="laptopBrand" class="form-control" required v-model.trim="brand">
+    <LaptopForm v-on:laptopFormSubmit="laptopFormSubmit">
+        Create
+    </LaptopForm>
 
-        <label for="laptopModel">Model</label>    
-        <input id="laptopNodel" class="form-control" required v-model.trim="model">
-
-        <label for="laptopSerialNumber">Serial Number</label>    
-        <input id="laptopSerialNumber" class="form-control" required v-model.trim="serialNumber">
-
-        <button class="btn btn-primary mt-3 mr-4" v-on:click="laptopFormSubmit">Create</button>
-        <button class="btn btn-outline-secondary mt-3" v-on:click="cancel">Cancel</button>
-
-    </div>
 </div>
 </template>
 
 <script>
 
+import LaptopForm from '@/components/forms/LaptopForm'
+
 export default {
     name: 'CreateLaptop',
+    components: {
+        LaptopForm
+    },
     data() {
         return {
             brand: '',
@@ -32,13 +28,8 @@ export default {
         }
     },
     methods:{
-        laptopFormSubmit() {
-            if (!this.brand || !this.model || !this.serialNumber) { 
-                alert('Enter the brand, model and serial number.')
-                return 
-            }
-
-            this.$services.laptops.addLaptop( { brand: this.brand, model: this.model, serialNumber: this.serialNumber }).then( data => {
+        laptopFormSubmit(laptop) {
+            this.$services.laptops.addLaptop(laptop).then( data => {
                 this.$router.push('/laptops')
             }).catch( err => {
                 console.error(err)

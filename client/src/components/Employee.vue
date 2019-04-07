@@ -4,28 +4,23 @@
 
     <h2>Edit Employee</h2>
 
-<form>
-    <div class="form-group">
+  <p>Employee ID {{ id }}</p>
 
-        <p>Employee ID {{ id }}</p>
-
-        <label for="employeeName">Employee Name</label>    
-        <input id="employeeName" class="form-control" v-model.trim="employee.name">
-
-        <button class="btn btn-primary mt-3 mr-3"  v-on:click="employeeFormSubmit">Update</button>
-        <button class="btn btn-outline-secondary mt-3" v-on:click="cancel">Cancel</button>
-
-    </div></form>
+    <EmployeeForm v-bind:employee="employee" v-on:employeeFormSubmit="employeeFormSubmit">
+        Edit
+    </EmployeeForm>
 
     <div>
         <h3>Laptops</h3>
 
         <h4 v-if="laptops.length == 0">{{ employee.name }} has no laptops assigned.</h4>
         <ul v-else>
-            <li v-for="laptop in laptops" v-bind:key="laptop.id">ID {{ laptop.id }}: {{ laptop.brand }} {{ laptop.model }} with serial number {{ laptop.serialNumber}} </li>        
+            <li v-for="laptop in laptops" v-bind:key="laptop.id">
+                <router-link :to="{ name: 'laptop', params: {id: laptop.id} }">ID {{ laptop.id }}</router-link>
+             {{ laptop.brand }} {{ laptop.model }} with serial number {{ laptop.serialNumber}} </li>        
         </ul>
     
-        <router-link to="/laptops">Assign laptops on the Laptop Management page</router-link>
+        <router-link to="/laptops">Assign laptops from a laptop's page</router-link>
     </div>
     
     <hr>
@@ -37,8 +32,13 @@
 
 <script>
 
+import EmployeeForm from '@/components/forms/EmployeeForm'
+
 export default {
     name: "Employee",
+    components: {
+        EmployeeForm
+    },
     data() {
         return {
             id: '',
@@ -48,26 +48,19 @@ export default {
         }
     },
     mounted() {
-
-        console.log(this.$route.params)
         this.id = this.$route.params.id
 
         this.$services.employees.getEmployee(this.id).then(data => {
             this.employee = data 
-            this.disabled = false 
-
+           
             this.$services.employees.getEmployeeLaptops(this.id).then(data => {
                 this.laptops = data 
             })
         })
     },
     methods:{
-        employeeFormSubmit() {
-            if (!this.employee.name) { 
-                alert('Enter a name')
-                return 
-            }
-            this.$services.employees.updateEmployee( {id: this.id, name: this.employee.name }).then( data => {
+        employeeFormSubmit(employee) {
+            this.$services.employees.updateEmployee( {id: this.id, ...employee }).then( data => {
                 this.$router.push('/employees')
             })
         },

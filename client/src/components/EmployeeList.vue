@@ -8,11 +8,10 @@
 </router-link>
 
   <table class="table table-hover">
-    <tr><th>id</th><th>Name</th><th>Number of Laptops</th><th>Edit</th></tr>
+    <tr><th>id</th><th>Name</th><th>Edit</th></tr>
     <tr v-for="employee in employees" v-bind:key="employee.id">
         <td>{{ employee.id }}</td>
         <td>{{ employee.name }}</td>
-        <td> todo  </td>
         <td>
             <router-link :to="{ name: 'employee', params: { id: employee.id } }">
                 <img src="@/assets/edit.png">

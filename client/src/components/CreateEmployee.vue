@@ -3,7 +3,9 @@
 
     <h2>Create New Employee</h2>
 
-    <EmployeeForm v-on:employeeFormSubmit="employeeFormSubmit"></EmployeeForm>
+    <EmployeeForm v-on:employeeFormSubmit="employeeFormSubmit">
+        Create
+    </EmployeeForm>
 
     
 </div>
