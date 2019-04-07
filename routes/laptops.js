@@ -1,11 +1,10 @@
 var express = require('express')
 var Laptop = require('../models').Laptop
+var Sequelize = require('sequelize')
 
 var router = express.Router() 
 
 router.get('/', function(req, res, next){
-    // todo some validation!
-    console.log(req.query)
     Laptop.findAll({order: ['serialNumber']}, {where: req.query}).then( laptops => {
         return res.json(laptops)
     }).catch( err => next(err) )
@@ -60,12 +59,7 @@ router.delete('/:id', function(req, res, next){
     }).catch( err => next(err) )
 })
 
-// TODO assign a laptop to an employee 
-
-// TODO unassign a laptop 
-
 router.patch('/:id/employee', function(req, res, next){
-    console.log('patching', req.body)
     Laptop.update(req.body, {where: {id: req.params.id}}).then( (rowsModified)=> {
         if (rowsModified) {
             return res.send('ok')
@@ -74,8 +68,12 @@ router.patch('/:id/employee', function(req, res, next){
         }
     }).catch( err => {
         // could be foreign key error - employee ID doesn't exist
-        console.log(err)
-        res.status(500).send('Unable to assign laptop')
+        if (err instanceof Sequelize.ForeignKeyConstraintError) {
+            return res.status(500).send('Employee does not exist, unable to assign laptop.')
+        } else {
+            console.log(err)
+            return res.status(500).send('Unable to assign laptop')
+        }
     })
 })
 

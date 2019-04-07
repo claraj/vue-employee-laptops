@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="home">
 
     <h1>Employee Laptop Management App</h1>
     <p>Welcome! Click on one of the links to start.</p>
@@ -16,4 +16,9 @@ export default {
 </script>
 
 <style>
+.home {
+    text-align: center;
+    margin: 50px;
+}
+
 </style>

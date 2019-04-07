@@ -6,8 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     serialNumber: {
       type: DataTypes.STRING,
       unique: true   
-    }
-      
+    }    
   }, {});
   Laptop.associate = function(models) {
     Laptop.belongsTo(models.Employee, {
