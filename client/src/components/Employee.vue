@@ -2,7 +2,7 @@
 
 <div>
 
-    <h2>Edit Employee</h2>
+  <h2>Edit Employee</h2>
 
   <p>Employee ID {{ id }}</p>
 
