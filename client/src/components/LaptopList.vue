@@ -1,14 +1,13 @@
 <template>
   <div class="laptop-list">
-  
-  <!-- <router-link to="/laptop"></router-link>     -->
-  
+
+  <Loading v-bind:loading="loading"></Loading>
+
   <h2>Laptops</h2>
 
   <router-link to="/create_laptop">
-  <button class="btn btn-secondary mt-2 mb-2">Create new laptop</button>
-</router-link>
-
+    <button class="btn btn-secondary mt-2 mb-2">Create new laptop</button>
+  </router-link>
 
   <table class="table table-hover">
     <tr><th>id</th><th>Brand</th><th>Model</th><th>Serial Number</th> <th>Employee ID</th> <th>Edit</th></tr>
@@ -36,10 +35,17 @@
 </template>
 
 <script>
+
+import Loading from '@/components/Loading.vue'
+
 export default {
-  name: 'Footer',
+  name: 'LaptopList',
+  components: {
+    Loading
+  },
   data() {
       return {
+          loading: false,
           laptops: []
       }
   },

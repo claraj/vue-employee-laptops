@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: 'Footer',
+  name: 'EmployeeList',
   data() {
       return {
           employees: []
