@@ -20,7 +20,7 @@
 <script>
 
 export default {
-    name: 'CreateEmployee',
+    name: 'EmployeeForm',
     props: {
         employee: Object
     },
@@ -45,7 +45,7 @@ export default {
     },
     watch: {
         employee() {
-            this.id = this.id
+            this.id = this.employee.id
             this.name = this.employee.name
         }
     }

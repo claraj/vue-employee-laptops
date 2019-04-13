@@ -41,7 +41,7 @@ export default {
     },
     data() {
         return {
-            id: '',
+            id: undefined,
             employee: {},
             disabled: true,
             laptops: []
@@ -49,18 +49,19 @@ export default {
     },
     mounted() {
         this.id = this.$route.params.id
-
-        this.$services.employees.getEmployee(this.id).then(data => {
-            this.employee = data 
-           
-            this.$services.employees.getEmployeeLaptops(this.id).then(data => {
-                this.laptops = data 
-            })
-        })
+        this.loadData()
     },
     methods:{
+        loadData() {
+            this.$services.employees.getEmployee(this.id).then(data => {
+                this.employee = data 
+                this.$services.employees.getEmployeeLaptops(this.id).then(data => {
+                    this.laptops = data 
+                })
+            })
+        },
         employeeFormSubmit(employee) {
-            this.$services.employees.updateEmployee( {id: this.id, ...employee }).then( data => {
+            this.$services.employees.updateEmployee(employee).then( data => {
                 this.$router.push('/employees')
             })
         },

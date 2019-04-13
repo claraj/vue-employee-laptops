@@ -37,6 +37,7 @@ export default {
     },
     data() {
         return {
+            id: undefined,
             laptop: {},
             employees: [],
             selectedEmployee: {}
@@ -49,9 +50,7 @@ export default {
     methods:{
         loadData() {
             this.$services.laptops.getLaptop(this.id).then(data => {
-                console.log(data)
                 this.laptop = data 
-
                 this.$services.employees.getAllEmployees().then(data => {
                     this.employees = data 
                     this.selectedEmployee = this.laptop.employeeId
@@ -62,7 +61,6 @@ export default {
             this.$services.laptops.updateLaptop(laptop).then( data => {
                 this.$router.push('/laptops')
             })
-        
         },
         cancel() {
             this.$router.push('/laptops')
@@ -72,7 +70,6 @@ export default {
                 alert('Select an employee') 
                 return
             }
-            console.log(this.selectedEmployee)
             this.$services.laptops.assignLaptop(this.laptop.id, this.selectedEmployee).then( data => {
                 this.loadData()
             }) 
