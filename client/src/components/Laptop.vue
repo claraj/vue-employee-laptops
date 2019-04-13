@@ -7,6 +7,8 @@
         Edit
     </LaptopForm>
 
+    <hr>
+    
     <h2 v-if="laptop.employeeId">This laptop is assigned to employee 
         <router-link :to="{ name: 'employee', params: { id: laptop.employeeId }}">#{{ laptop.employeeId }}</router-link> </h2>
     <h2 v-else>This laptop is not assigned to an employee </h2>

@@ -36,13 +36,8 @@
 
 <script>
 
-import Loading from '@/components/Loading.vue'
-
 export default {
   name: 'LaptopList',
-  components: {
-    Loading
-  },
   data() {
       return {
           loading: false,
