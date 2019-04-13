@@ -8,7 +8,7 @@
     </LaptopForm>
 
     <hr>
-    
+
     <h2 v-if="laptop.employeeId">This laptop is assigned to employee 
         <router-link :to="{ name: 'employee', params: { id: laptop.employeeId }}">#{{ laptop.employeeId }}</router-link> </h2>
     <h2 v-else>This laptop is not assigned to an employee </h2>
@@ -23,7 +23,7 @@
     <button class="btn btn-secondary mt-2" v-on:click="unassign">Unassign Laptop</button>
 
     <hr>
-    <button class="btn btn-danger mt-5" v-on:click="deleteLaptop">Delete Laptop</button>
+    <button class="btn btn-danger mt-3" v-on:click="deleteLaptop">Delete Laptop</button>
     
 </div>
 </template>

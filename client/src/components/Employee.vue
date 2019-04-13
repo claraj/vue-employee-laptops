@@ -25,7 +25,7 @@
     
     <hr>
 
-    <button class="btn btn-danger mt-3 mr-5" v-on:click="deleteEmployee">Delete</button>
+    <button class="btn btn-danger mt-3" v-on:click="deleteEmployee">Delete Employee</button>
 
 </div>
 </template>
