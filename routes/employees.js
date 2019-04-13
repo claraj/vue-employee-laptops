@@ -55,41 +55,19 @@ router.patch('/:id', function(req, res, next){
 })
 
 
-// get all laptops for employee
-router.get('/:id/laptops', function(req, res, next){
-    Laptop.findAll({where: { employeeId: req.params.id}}).then( laptops =>
-        res.json(laptops) 
-    )
-})
-
-
-router.patch('/:id/laptops', function(req, res, next){
-    
-    console.log('patching laptop with following data ')
-    console.log(req.body)
-
-    if (req.body.employeeId) {
-        updateOptions = { employeeId: req.params.id }
-    } else {
-        updateOptions = { employeeId: null }
-    }
-
-    Laptop.update(updateOptions, { where: { id: req.body.laptopId } }).then( (result) => {
-        if (result) {
-        return res.send('ok')
-        } else 
-        res.status(404).send('Laptop not found')
-    }
-    ).catch( err => {
-        //todo employee number not found 
-    })
-})
-
-
 router.delete('/:id', function(req, res, next){ 
     Employee.destroy({where: {id: req.params.id}}).then( rowsModified => {
         return res.send('ok')
     }).catch( err => next(err) )
 })
+
+
+// get all laptops for employee
+router.get('/:id/laptops', function(req, res, next){
+    Laptop.findAll({where: { employeeId: req.params.id }}).then( laptops =>
+        res.json(laptops) 
+    )
+})
+
 
 module.exports = router 
