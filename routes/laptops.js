@@ -10,6 +10,7 @@ router.get('/', function(req, res, next){
     }).catch( err => next(err) )
 })
 
+
 router.get('/:id', function(req, res, next) {
     Laptop.findByPk(req.params.id).then(laptop => {
         if (laptop) {
@@ -20,17 +21,19 @@ router.get('/:id', function(req, res, next) {
     }).catch( err => next(err) )
 })
 
+
 router.post('/', function(req, res, next){
     Laptop.create(req.body).then( (data) => {
         return res.send('ok')
     }).catch( err => {
         if (err instanceof Sequelize.ValidationError) {
             let messages = err.errors.map( (e) => e.message)
-            return res.status(500).json(messages)
+            return res.status(400).json(messages)
         }
         return next(err)
     } )
 })
+
 
 router.patch('/:id', function(req, res, next){   
     Laptop.update(
@@ -53,11 +56,13 @@ router.patch('/:id', function(req, res, next){
     })
 })
 
+
 router.delete('/:id', function(req, res, next){ 
     Laptop.destroy({where: {id: req.params.id}}).then( rowsModified => {
         return res.send('ok')
     }).catch( err => next(err) )
 })
+
 
 router.patch('/:id/employee', function(req, res, next){
     Laptop.update(req.body, {where: {id: req.params.id}}).then( (rowsModified)=> {

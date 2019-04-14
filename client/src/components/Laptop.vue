@@ -62,6 +62,12 @@ export default {
         laptopFormSubmit(laptop) {
             this.$services.laptops.updateLaptop(laptop).then( data => {
                 this.$router.push('/laptops')
+            }).catch( err => {
+                if (err.response.status == 400) {
+                    alert('Error editing laptop because ' + err.response.data)
+                } else {
+                    alert('Error editing laptop.')
+                }
             })
         },
         cancel() {

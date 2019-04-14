@@ -12,6 +12,7 @@ router.get('/', function(req, res, next){
     }).catch( err => next(err) )
 })
 
+
 router.get('/:id', function(req, res, next) {
     Employee.findByPk(req.params.id).then(employee => {
         if (employee) {
@@ -21,6 +22,7 @@ router.get('/:id', function(req, res, next) {
         }
     }).catch( err => next(err) )
 })
+
 
 router.post('/', function(req, res, next){
     Employee.create(req.body).then( (data) => {
@@ -33,6 +35,7 @@ router.post('/', function(req, res, next){
         return next(err)
     } )
 })
+
 
 router.patch('/:id', function(req, res, next){   
     Employee.update(

@@ -25,10 +25,12 @@ export default {
             this.$services.laptops.addLaptop(laptop).then( data => {
                 this.$router.push('/laptops')
             }).catch( err => {
-                console.error(err)
-                alert('Error creating laptop.')
+                if (err.response.status == 400) {
+                    alert('Error creating laptop because ' + err.response.data)
+                } else {
+                    alert('Error creating laptop.')
+                }
             })
-            
         },
         cancel() {
             this.$router.push('/laptops')
