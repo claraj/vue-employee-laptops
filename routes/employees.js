@@ -28,7 +28,7 @@ router.post('/', function(req, res, next){
     }).catch( err => {
         if (err instanceof Sequelize.ValidationError) {
             let messages = err.errors.map( (e) => e.message)
-            return res.status(500).json(messages)
+            return res.status(400).json(messages)
         }
         return next(err)
     } )
@@ -49,7 +49,7 @@ router.patch('/:id', function(req, res, next){
     }).catch( err => {
         if (err instanceof Sequelize.ValidationError) {
             let messages = err.errors.map( (e) => e.message)
-            return res.status(500).json(messages)
+            return res.status(400).json(messages)
         }
         return next(err)
     })
@@ -65,9 +65,9 @@ router.delete('/:id', function(req, res, next){
 
 // get all laptops for employee
 router.get('/:id/laptops', function(req, res, next){
-    Laptop.findAll({where: { employeeId: req.params.id }}).then( laptops =>
-        res.json(laptops) 
-    )
+    Laptop.findAll({where: { employeeId: req.params.id }}).then( laptops => {
+        return res.json(laptops) 
+    }).catch( err => next(err) )
 })
 
 

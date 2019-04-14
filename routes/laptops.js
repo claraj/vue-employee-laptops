@@ -47,7 +47,7 @@ router.patch('/:id', function(req, res, next){
     }).catch( err => {
         if (err instanceof Sequelize.ValidationError) {
             let messages = err.errors.map( (e) => e.message)
-            return res.status(500).json(messages)
+            return res.status(400).json(messages)
         }
         return next(err)
     })
@@ -69,7 +69,7 @@ router.patch('/:id/employee', function(req, res, next){
     }).catch( err => {
         // could be foreign key error - employee ID doesn't exist
         if (err instanceof Sequelize.ForeignKeyConstraintError) {
-            return res.status(500).send('Employee does not exist, unable to assign laptop.')
+            return res.status(400).send('Employee does not exist, unable to assign laptop.')
         } else {
             console.log(err)
             return res.status(500).send('Unable to assign laptop')
