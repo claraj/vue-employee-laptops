@@ -20,13 +20,6 @@ export default {
     components: {
         LaptopForm
     },
-    data() {
-        return {
-            brand: '',
-            model: '',
-            serialNumber: ''
-        }
-    },
     methods:{
         laptopFormSubmit(laptop) {
             this.$services.laptops.addLaptop(laptop).then( data => {
