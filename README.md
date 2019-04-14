@@ -14,31 +14,41 @@ npm install
 
 ### Initialize sequelize, set up models 
 
-`sequelize init`
+```
+sequelize init
+```
 
 - create models & migrations 
 
-`sequelize model:create --name Employee --attributes name:string`
+```
+sequelize model:create --name Employee --attributes name:string
 
-`sequelize model:create --name Laptop --attributes brand:string,model:string,serialNumber:string`
+sequelize model:create --name Laptop --attributes brand:string,model:string,serialNumber:string
+```
 
 - Edit migrations, model to add association, constraints (see slides)
 
 - migrate
 
-`sequelize db:migrate`
+```
+sequelize db:migrate
+```
 
-- optionally create seeds
+- Optionally seed database with example data.
 
-Run servers 
+### Run servers 
 
 Run node/express server with 
 
-`nodemon`
+```
+nodemon
+```
 
 or 
 
-`node server.js`
+```
+node server.js
+```
 
 And run client with 
 
