@@ -1,20 +1,20 @@
 ## Employee Laptops 
 
-https://employee-laptop.herokuapp.com/#/
+Live version at 
+https://employee-laptop.herokuapp.com/
 
-`npm init`
 
-entry point = server.js
+### Install dependencies 
 
-`npm i express body-parser pg sequelize sequelize-cli` 
+```
+npm install
+cd client 
+npm install
+```
 
-`npm i --save-dev sqlite3`
+### Initialize sequelize, set up models 
 
-create git repo and add node_modules
-
-sequelize 
-
-sequelize init
+`sequelize init`
 
 - create models & migrations 
 
@@ -22,23 +22,32 @@ sequelize init
 
 `sequelize model:create --name Laptop --attributes brand:string,model:string,serialNumber:string`
 
-
-- Edit migrations, model to add association 
+- Edit migrations, model to add association, constraints (see slides)
 
 - migrate
 
+`sequelize db:migrate`
+
 - optionally create seeds
 
+Run servers 
 
-`vue create client`
-  - default options 
-  - delete dist from .gitignore file 
-  - remove .git folder 
+Run node/express server with 
 
-`npm i bootstrap-vue axios vue-router`
+`nodemon`
 
-  - cd client && npm run serve 
+or 
 
+`node server.js`
+
+And run client with 
+
+```
+cd client
+npm run serve 
+```
+
+### Credits 
 
 Edit icon from 
 https://icons8.com/icon/16260/edit-column
