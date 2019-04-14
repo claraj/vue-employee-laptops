@@ -70,9 +70,6 @@ export default {
                 }
             })
         },
-        cancel() {
-            this.$router.push('/laptops')
-        },
         updateEmployee() {
             if (!this.selectedEmployee) { 
                 alert('Select an employee') 

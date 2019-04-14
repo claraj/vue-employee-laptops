@@ -65,9 +65,6 @@ export default {
                 this.$router.push('/employees')
             })
         },
-        cancel() {
-            this.$router.push('/employees')
-        },
         deleteEmployee() {
             if (confirm(`Delete ${this.employee.name}?`))
             this.$services.employees.deleteEmployee(this.id).then( () => {
