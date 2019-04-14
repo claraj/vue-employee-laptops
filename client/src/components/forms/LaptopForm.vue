@@ -39,7 +39,6 @@ export default {
     },
     watch: {
         laptop() {
-            console.log('laopto', this.laptop)
             this.id = this.laptop.id
             this.brand = this.laptop.brand
             this.model = this.laptop.model
